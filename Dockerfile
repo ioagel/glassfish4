@@ -7,13 +7,13 @@ ENV \
   MJDBC=5.1.47 \
   USER_NAME=glassfish \
   USER_ID=10001 \
-  GOSU_VERSION=1.11
-  # PATH="${PATH}:/glassfish4/bin" \
+  GOSU_VERSION=1.11 \
+  PATH="${PATH}:/glassfish4/bin"
 
 RUN echo "deb http://deb.debian.org/debian stretch contrib" > /etc/apt/sources.list.d/contrib.list
 RUN apt-get update && apt-get install -y --no-install-recommends gnupg dirmngr wget ttf-mscorefonts-installer && rm -rf /var/lib/apt/lists/*
 
-# Stolen from mysql image ;-)
+# Kindly borrowed from official mysql image ;-)
 # add gosu for easy step-down from root
 RUN set -x && \
   wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture)" && \
@@ -41,4 +41,4 @@ WORKDIR     /glassfish4
 
 EXPOSE      8080 4848 8181
 # verbose causes the process to remain in the foreground so that docker can track it
-CMD         ["/glassfish4/bin/asadmin", "start-domain", "-v"]
+CMD         ["asadmin", "start-domain", "-v"]
