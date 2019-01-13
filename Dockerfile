@@ -1,4 +1,4 @@
-FROM openjdk:8-alpine
+FROM openjdk:7-alpine
 
 MAINTAINER  Ioannis Angelakopoulos<ioagel@gmail.com>
 
