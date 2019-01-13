@@ -7,8 +7,8 @@ ENV \
   MJDBC=5.1.47 \
   USER_NAME=glassfish \
   USER_ID=10001 \
-  PATH="${PATH}:/glassfish4/bin" \
   GOSU_VERSION=1.11
+  # PATH="${PATH}:/glassfish4/bin" \
 
 RUN echo "deb http://deb.debian.org/debian stretch contrib" > /etc/apt/sources.list.d/contrib.list
 
@@ -25,15 +25,15 @@ RUN set -x && \
   rm -rf "$GNUPGHOME" /usr/local/bin/gosu.asc && \
   chmod +x /usr/local/bin/gosu && \
   gosu nobody true && \
-  cp -a /usr/share/fonts/truetype/msttcorefonts /msttcorefonts && \
+  cp -a /usr/share/fonts/truetype/msttcorefonts /truetype && \
   wget http://download.oracle.com/glassfish/4.1.2/release/glassfish-${GF_REL}.zip && \
   wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-${MJDBC}.zip && \
   unzip glassfish-${GF_REL}.zip && \
   unzip mysql-connector-java-${MJDBC}.zip && \
   mv mysql-connector-java-${MJDBC}/mysql-connector-java-${MJDBC}-bin.jar /glassfish4/glassfish/domains/domain1/lib/ && \
   rm -rf *.zip mysql* && \
-  apt-get purge -y --auto-remove ca-certificates wget unzip ttf-mscorefonts-installer && \
-  mkdir -p /usr/share/fonts/truetype && mv /msttcorefonts/* /usr/share/fonts/truetype/ && rm -rf /msttcorefonts
+  apt-get purge -y --auto-remove wget ttf-mscorefonts-installer && \
+  rm -rf /usr/share/fonts/truetype && cp -a /truetype /usr/share/fonts/ && rm -rf /truetype
 
 COPY        docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT  ["docker-entrypoint.sh"]
@@ -41,4 +41,4 @@ WORKDIR     /glassfish4
 
 EXPOSE      8080 4848 8181
 # verbose causes the process to remain in the foreground so that docker can track it
-CMD         ["asadmin", "start-domain", "-v"]
+CMD         ["/glassfish4/bin/asadmin", "start-domain", "-v"]
