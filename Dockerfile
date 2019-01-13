@@ -11,11 +11,11 @@ ENV \
   # PATH="${PATH}:/glassfish4/bin" \
 
 RUN echo "deb http://deb.debian.org/debian stretch contrib" > /etc/apt/sources.list.d/contrib.list
+RUN apt-get update && apt-get install -y --no-install-recommends gnupg dirmngr wget ttf-mscorefonts-installer && rm -rf /var/lib/apt/lists/*
 
 # Stolen from mysql image ;-)
 # add gosu for easy step-down from root
 RUN set -x && \
-  apt-get update && apt-get install -y --no-install-recommends gnupg dirmngr ca-certificates wget unzip ttf-mscorefonts-installer && rm -rf /var/lib/apt/lists/* && \
   wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture)" && \
   wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture).asc" && \
   export GNUPGHOME="$(mktemp -d)" && \
