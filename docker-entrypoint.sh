@@ -7,8 +7,10 @@ if [ $? -ne 0 ]; then
     chown -R $USER_NAME:$USER_NAME /glassfish4
 fi
 
-if [ "$1" = 'asadmin' ]; then
-    exec su-exec $USER_NAME "$@"
-fi
+# if [ "$1" = 'asadmin' ]; then
+#     exec su-exec $USER_NAME "$@"
+# fi
 
-exec "$@"
+# exec "$@"
+
+exec su-exec $USER_NAME "$@"
