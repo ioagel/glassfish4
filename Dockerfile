@@ -5,8 +5,8 @@ MAINTAINER  Ioannis Angelakopoulos<ioagel@gmail.com>
 ENV \
   GF_REL=4.1.2-web \
   MJDBC=5.1.47 \
-  USERNAME=glassfish \
-  UID=10001 \
+  USER_NAME=glassfish \
+  USER_ID=10001 \
   PATH="/glassfish4/bin:${PATH}"
 
 RUN \
