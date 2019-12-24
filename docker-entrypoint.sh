@@ -6,9 +6,14 @@ if ! getent passwd "$USER_NAME" > /dev/null; then
 fi
 
 GF_CONFIG=/glassfish4/glassfish/domains/domain1/config
-if [ ! -f "$GF_CONFIG/domain.xml" ] ; then
-  cp "$GF_CONFIG"/domain.before-sed.xml "$GF_CONFIG"/domain.xml
-  gosu "$USER_NAME" sed -i "s/MYSQL_PASS_PLACEHOLDER/$MYSQL_PASS/" "$GF_CONFIG"/domain.xml
+if [ ! -f "$GF_CONFIG/domain.xml.configured" ] ; then
+  gosu "$USER_NAME" cp "$GF_CONFIG"/domain.before-sed.xml "$GF_CONFIG"/domain.xml
+  gosu "$USER_NAME" sed -i "s/MYSQL_PASS/$MYSQL_PASS/" "$GF_CONFIG"/domain.xml
+  gosu "$USER_NAME" sed -i "s/MYSQL_HOST/$MYSQL_HOST/" "$GF_CONFIG"/domain.xml
+  gosu "$USER_NAME" sed -i "s/MYSQL_PORT/$MYSQL_PORT/" "$GF_CONFIG"/domain.xml
+  gosu "$USER_NAME" sed -i "s/MYSQL_DB/$MYSQL_DB/" "$GF_CONFIG"/domain.xml
+  gosu "$USER_NAME" sed -i "s/MYSQL_USER/$MYSQL_USER/" "$GF_CONFIG"/domain.xml
+  gosu "$USER_NAME" touch "$GF_CONFIG"/domain.xml.configured
 fi
 
 if [ "$1" = 'asadmin' ]; then
