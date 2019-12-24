@@ -11,7 +11,7 @@ ENV \
   PATH="${PATH}:/glassfish4/bin"
 
 RUN echo "deb http://deb.debian.org/debian stretch contrib" > /etc/apt/sources.list.d/contrib.list
-RUN apt-get update && apt-get install -y --no-install-recommends gnupg dirmngr wget ttf-mscorefonts-installer && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends gnupg dirmngr wget unzip ttf-mscorefonts-installer && rm -rf /var/lib/apt/lists/*
 
 # Kindly borrowed from official mysql image ;-)
 # add gosu for easy step-down from root
