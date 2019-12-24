@@ -4,7 +4,7 @@ MAINTAINER  Ioannis Angelakopoulos<ioagel@gmail.com>
 
 ENV \
   GF_REL=4.1.2-web \
-  MJDBC=5.1.47 \
+  MJDBC=8.0.18 \
   USER_NAME=glassfish \
   USER_ID=10001 \
   GOSU_VERSION=1.11 \
