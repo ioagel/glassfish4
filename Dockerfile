@@ -31,9 +31,8 @@ RUN set -x && \
   unzip glassfish-${GF_REL}.zip && \
   unzip mysql-connector-java-${MJDBC}.zip && \
   mv mysql-connector-java-${MJDBC}/mysql-connector-java-${MJDBC}.jar /glassfish4/glassfish/domains/domain1/lib/ && \
-  rm -rf *.zip mysql* && \
   apt-get purge -y --auto-remove wget unzip ttf-mscorefonts-installer && \
-  rm -rf /usr/share/fonts/truetype/msttcorefonts /usr/share/fonts/X11
+  rm -rf /usr/share/fonts/truetype/msttcorefonts /usr/share/fonts/X11 *.zip mysql*
 
 COPY        docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT  ["docker-entrypoint.sh"]
