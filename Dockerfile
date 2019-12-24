@@ -1,4 +1,4 @@
-FROM openjdk:8-slim
+FROM openjdk:8-slim-buster
 
 MAINTAINER  Ioannis Angelakopoulos<ioagel@gmail.com>
 
@@ -25,15 +25,15 @@ RUN set -x && \
   rm -rf "$GNUPGHOME" /usr/local/bin/gosu.asc && \
   chmod +x /usr/local/bin/gosu && \
   gosu nobody true && \
-  cp -a /usr/share/fonts/truetype/msttcorefonts /truetype && \
+  cp -a /usr/share/fonts/truetype/msttcorefonts/* /usr/share/fonts/truetype && \
   wget http://download.oracle.com/glassfish/4.1.2/release/glassfish-${GF_REL}.zip && \
   wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-${MJDBC}.zip && \
   unzip glassfish-${GF_REL}.zip && \
   unzip mysql-connector-java-${MJDBC}.zip && \
   mv mysql-connector-java-${MJDBC}/mysql-connector-java-${MJDBC}.jar /glassfish4/glassfish/domains/domain1/lib/ && \
   rm -rf *.zip mysql* && \
-  apt-get purge -y --auto-remove wget ttf-mscorefonts-installer && \
-  rm -rf /usr/share/fonts/truetype && cp -a /truetype /usr/share/fonts/ && rm -rf /truetype
+  apt-get purge -y --auto-remove wget unzip ttf-mscorefonts-installer && \
+  rm -rf /usr/share/fonts/truetype/msttcorefonts /usr/share/fonts/X11
 
 COPY        docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT  ["docker-entrypoint.sh"]
