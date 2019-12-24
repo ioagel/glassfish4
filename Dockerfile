@@ -10,7 +10,7 @@ ENV \
   GOSU_VERSION=1.11 \
   PATH="${PATH}:/glassfish4/bin"
 
-RUN echo "deb http://deb.debian.org/debian stretch contrib" > /etc/apt/sources.list.d/contrib.list
+RUN echo "deb http://deb.debian.org/debian buster contrib" > /etc/apt/sources.list.d/contrib.list
 RUN apt-get update && apt-get install -y --no-install-recommends gnupg dirmngr wget unzip ttf-mscorefonts-installer && rm -rf /var/lib/apt/lists/*
 
 # Kindly borrowed from official mysql image ;-)
@@ -30,7 +30,7 @@ RUN set -x && \
   wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-${MJDBC}.zip && \
   unzip glassfish-${GF_REL}.zip && \
   unzip mysql-connector-java-${MJDBC}.zip && \
-  mv mysql-connector-java-${MJDBC}/mysql-connector-java-${MJDBC}-bin.jar /glassfish4/glassfish/domains/domain1/lib/ && \
+  mv mysql-connector-java-${MJDBC}/mysql-connector-java-${MJDBC}.jar /glassfish4/glassfish/domains/domain1/lib/ && \
   rm -rf *.zip mysql* && \
   apt-get purge -y --auto-remove wget ttf-mscorefonts-installer && \
   rm -rf /usr/share/fonts/truetype && cp -a /truetype /usr/share/fonts/ && rm -rf /truetype
