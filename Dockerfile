@@ -1,4 +1,4 @@
-FROM openjdk:8-slim
+FROM openjdk:8-slim-stretch
 
 MAINTAINER  Ioannis Angelakopoulos<ioagel@gmail.com>
 
