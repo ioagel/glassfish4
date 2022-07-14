@@ -1,6 +1,6 @@
 FROM openjdk:8-alpine
 
-MAINTAINER  Ioannis Angelakopoulos<ioagel@gmail.com>
+LABEL org.opencontainers.image.authors="Ioannis Angelakopoulos<ioagel@gmail.com>"
 
 ENV MJDBC=5.1.49 \
     USER_ID=10001 \
