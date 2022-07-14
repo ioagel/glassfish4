@@ -2,7 +2,7 @@ FROM openjdk:8-alpine
 
 MAINTAINER  Ioannis Angelakopoulos<ioagel@gmail.com>
 
-ENV MJDBC=5.1.47 \
+ENV MJDBC=5.1.49 \
     USER_ID=10001 \
     PATH="/glassfish4/bin:${PATH}"
 
